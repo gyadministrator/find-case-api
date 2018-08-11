@@ -8,7 +8,7 @@ package com.gy.findcase.findcaseapi.config;
 public class Constants {
     public final static String JWT_LOGIN_USER = "不能获取到用户信息";
     public final static String GET_TOKEN_FAILURE="获取token失败....";
-    public final static String LOGIN_USER="loginUser";
+    public final static String LOGIN_USER="unique_name";
     public final static String BEARER="bearer";
 
     public static final Integer DEVELOP = 0;

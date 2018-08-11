@@ -1,4 +1,5 @@
 package com.gy.findcase.findcaseapi.service.impl;
+
 import com.gy.findcase.findcaseapi.entity.User;
 import com.gy.findcase.findcaseapi.jwt.utils.Audience;
 import com.gy.findcase.findcaseapi.jwt.utils.JwtUtils;
@@ -8,6 +9,7 @@ import com.gy.findcase.findcaseapi.service.support.Items;
 import com.gy.findcase.findcaseapi.service.support.OrderType;
 import com.gy.findcase.findcaseapi.service.support.PageQuery;
 import com.gy.findcase.findcaseapi.service.support.QueryUtils;
+import com.gy.findcase.findcaseapi.utils.Md5Utils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +50,27 @@ public class UserServiceImpl implements UserService {
         Claims claims = JwtUtils.parseJWT(auth, audienceEntity.getBase64Secret());
         return (String) claims.get("loginUser");
     }
+
+    @Override
+    public void update(User user) {
+        try {
+            User u = this.queryById(user.getId());
+            if (user.getAccount() != null) {
+                u.setAccount(user.getAccount());
+            }
+            if (user.getImage() != null) {
+                u.setImage(user.getImage());
+            }
+            if (user.getPassword() != null) {
+                String pwd = Md5Utils.MD5(user.getPassword() + user.getUserCode());
+                u.setPassword(pwd);
+            }
+            this.userRepository.save(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public String saveReturnId(User user) {
         this.userRepository.save(user);

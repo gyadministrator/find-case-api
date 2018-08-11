@@ -23,4 +23,11 @@ public interface UserService extends BaseService<User, String> {
      * @return
      */
     String parseToken(String token);
+
+    /**
+     * 修改用户
+     *
+     * @param user
+     */
+    void update(User user);
 }

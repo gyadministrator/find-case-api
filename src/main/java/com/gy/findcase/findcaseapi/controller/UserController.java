@@ -1,5 +1,6 @@
 package com.gy.findcase.findcaseapi.controller;
 
+import com.gy.findcase.findcaseapi.annotation.CurrentUser;
 import com.gy.findcase.findcaseapi.entity.User;
 import com.gy.findcase.findcaseapi.jwt.utils.AccessToken;
 import com.gy.findcase.findcaseapi.jwt.utils.Audience;
@@ -12,10 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -93,5 +91,13 @@ public class UserController {
         } else {
             return simpleResponse(500, "", "此用户名已经存在");
         }
+    }
+
+    @ApiOperation(value = "修改用户")
+    @PutMapping
+    public SimpleResponse update(@RequestBody User user, @CurrentUser User u) {
+        logger.info("修改用户---->" + user.toString());
+        this.userService.update(user);
+        return simpleResponse(200);
     }
 }
