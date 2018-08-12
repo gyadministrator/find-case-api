@@ -22,11 +22,11 @@ public class QueryUtils<T> {
      * @param repository
      * @param currentPage
      * @param pageSize
-     * @param sortField
      * @param orderType
+     * @param sortField
      * @return
      */
-    public PageQuery<T> query(JpaRepository repository, Integer currentPage, Integer pageSize, OrderType orderType, String... sortField) {
+    public PageQuery query(JpaRepository repository, Integer currentPage, Integer pageSize, OrderType orderType, String... sortField) {
 
         OrderType var1 = orderType;
         Sort sort = null;
@@ -39,12 +39,9 @@ public class QueryUtils<T> {
         }
 
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
-
         long count = repository.count();
-
-        Page<T> items = repository.findAll(pageable);
-
-        PageQuery<T> query = new PageQuery();
+        Page items = repository.findAll(pageable);
+        PageQuery query = new PageQuery();
         query.setCurrentPage(currentPage);
         query.setPageSize(pageSize);
         query.setCount(count);
