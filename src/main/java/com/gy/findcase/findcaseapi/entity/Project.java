@@ -74,4 +74,15 @@ public class Project {
 
     @ManyToOne
     private User user;
+
+    /**
+     * 轮播图
+     */
+    private String one;
+
+    private String two;
+
+    private String three;
+
+    private String four;
 }

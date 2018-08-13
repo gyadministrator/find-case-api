@@ -51,4 +51,9 @@ public class User {
      * 类型 0 开发者 1 普通用户
      */
     private Integer type;
+
+    /**
+     * 电话
+     */
+    private String phone;
 }
