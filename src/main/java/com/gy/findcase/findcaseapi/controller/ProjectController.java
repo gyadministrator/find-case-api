@@ -65,8 +65,15 @@ public class ProjectController {
 
     @ApiOperation(value = "我发布的项目")
     @GetMapping("/release")
-    public SimpleResponse queryById( @CurrentUser User user) {
+    public SimpleResponse queryById(@CurrentUser User user) {
         List<Project> projects = this.projectService.queryProjectByUserId(user);
         return simpleResponse(200, projects);
+    }
+
+    @ApiOperation(value = "通过id获取项目")
+    @GetMapping("/getOne/{id}")
+    public SimpleResponse getById(@PathVariable("id") String id, @CurrentUser User user) throws Exception {
+        Project project = this.projectService.queryById(id);
+        return simpleResponse(200, project);
     }
 }

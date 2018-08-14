@@ -55,15 +55,22 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         try {
             User u = this.queryById(user.getId());
-            if (user.getAccount() != null) {
+            assert user.getAccount() != null;
+            if (user.getAccount() != null || !"".equals(user.getAccount())) {
                 u.setAccount(user.getAccount());
             }
-            if (user.getImage() != null) {
+            assert user.getImage() != null;
+            if (user.getImage() != null || !"".equals(user.getImage())) {
                 u.setImage(user.getImage());
             }
-            if (user.getPassword() != null) {
+            assert user.getPassword() != null;
+            if (user.getPassword() != null || !"".equals(user.getPassword())) {
                 String pwd = Md5Utils.MD5(user.getPassword() + user.getUserCode());
                 u.setPassword(pwd);
+            }
+            assert user.getPhone() != null;
+            if (user.getPhone() != null || !"".equals(user.getPhone())) {
+                u.setPhone(user.getPhone());
             }
             this.userRepository.save(u);
         } catch (Exception e) {
