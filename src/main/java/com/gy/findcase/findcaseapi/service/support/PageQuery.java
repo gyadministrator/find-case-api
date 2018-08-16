@@ -17,5 +17,4 @@ public class PageQuery<T> {
     private Integer pageSize;
     private Long count;
     private List<T> items;
-
 }
