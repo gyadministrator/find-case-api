@@ -1,6 +1,9 @@
 package com.gy.findcase.findcaseapi.service;
 
+import com.gy.findcase.findcaseapi.entity.Problem;
 import com.gy.findcase.findcaseapi.entity.Reply;
+
+import java.util.List;
 
 /**
  * @author gaoyun
@@ -10,4 +13,11 @@ import com.gy.findcase.findcaseapi.entity.Reply;
  * @description
  */
 public interface ReplyService extends BaseService<Reply, String> {
+    /**
+     * 通过问题查询评论数
+     *
+     * @param problem
+     * @return
+     */
+    List<Reply> queryByProblem(Problem problem);
 }

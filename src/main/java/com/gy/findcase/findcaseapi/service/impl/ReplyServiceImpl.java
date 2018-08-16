@@ -1,5 +1,6 @@
 package com.gy.findcase.findcaseapi.service.impl;
 
+import com.gy.findcase.findcaseapi.entity.Problem;
 import com.gy.findcase.findcaseapi.entity.Reply;
 import com.gy.findcase.findcaseapi.repository.ReplyRepository;
 import com.gy.findcase.findcaseapi.service.ReplyService;
@@ -63,5 +64,10 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public PageQuery<Reply> query(Integer currentPage, Integer pageSize, OrderType orderType, String... sortField) {
         return new QueryUtils<Reply>().query(replyRepository, currentPage, pageSize, orderType, sortField);
+    }
+
+    @Override
+    public List<Reply> queryByProblem(Problem problem) {
+        return this.replyRepository.findByProblem(problem);
     }
 }

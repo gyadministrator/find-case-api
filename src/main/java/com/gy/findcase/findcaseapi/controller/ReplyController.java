@@ -1,12 +1,22 @@
 package com.gy.findcase.findcaseapi.controller;
 
+import com.gy.findcase.findcaseapi.annotation.CurrentUser;
+import com.gy.findcase.findcaseapi.entity.Problem;
+import com.gy.findcase.findcaseapi.entity.Reply;
+import com.gy.findcase.findcaseapi.entity.User;
 import com.gy.findcase.findcaseapi.service.ReplyService;
+import com.gy.findcase.findcaseapi.service.support.Items;
+import com.gy.findcase.findcaseapi.utils.response.SimpleResponse;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.gy.findcase.findcaseapi.utils.response.HttpResponseAndStatus.simpleResponse;
 
 /**
  * @author gaoyun
@@ -25,5 +35,19 @@ public class ReplyController {
     @Autowired
     public ReplyController(ReplyService replyService) {
         this.replyService = replyService;
+    }
+
+    @ApiOperation(value = "添加问题")
+    @PostMapping
+    public SimpleResponse add(@RequestBody Reply reply, @CurrentUser User user) {
+        this.replyService.save(reply);
+        return simpleResponse(200);
+    }
+
+    @ApiOperation(value = "查询所有的问题")
+    @PostMapping("/problem")
+    public SimpleResponse query(@RequestBody Problem problem, @CurrentUser User user) {
+        List<Reply> query = this.replyService.queryByProblem(problem);
+        return simpleResponse(200, query);
     }
 }
