@@ -9,6 +9,7 @@ import com.gy.findcase.findcaseapi.service.support.OrderType;
 import com.gy.findcase.findcaseapi.service.support.PageQuery;
 import com.gy.findcase.findcaseapi.service.support.QueryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,7 +57,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Items<Project> query() {
-        List<Project> all = this.projectRepository.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        List<Project> all = this.projectRepository.findAll(sort);
         long count = this.projectRepository.count();
         return new Items<>(count, all);
     }

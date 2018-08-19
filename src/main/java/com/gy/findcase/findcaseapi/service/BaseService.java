@@ -3,6 +3,7 @@ package com.gy.findcase.findcaseapi.service;
 import com.gy.findcase.findcaseapi.service.support.Items;
 import com.gy.findcase.findcaseapi.service.support.OrderType;
 import com.gy.findcase.findcaseapi.service.support.PageQuery;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

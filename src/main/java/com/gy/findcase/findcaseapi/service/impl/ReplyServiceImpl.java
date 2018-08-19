@@ -9,6 +9,7 @@ import com.gy.findcase.findcaseapi.service.support.OrderType;
 import com.gy.findcase.findcaseapi.service.support.PageQuery;
 import com.gy.findcase.findcaseapi.service.support.QueryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,7 +57,8 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public Items<Reply> query() {
-        List<Reply> all = this.replyRepository.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        List<Reply> all = this.replyRepository.findAll(sort);
         long count = this.replyRepository.count();
         return new Items<>(count, all);
     }

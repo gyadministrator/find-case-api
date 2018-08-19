@@ -12,6 +12,7 @@ import com.gy.findcase.findcaseapi.service.support.QueryUtils;
 import com.gy.findcase.findcaseapi.utils.Md5Utils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -106,7 +107,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Items<User> query() {
-        List<User> all = this.userRepository.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        List<User> all = this.userRepository.findAll(sort);
         long count = this.userRepository.count();
         return new Items<>(count, all);
     }

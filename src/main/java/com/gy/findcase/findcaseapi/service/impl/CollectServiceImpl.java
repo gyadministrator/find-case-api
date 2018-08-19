@@ -9,6 +9,7 @@ import com.gy.findcase.findcaseapi.service.support.OrderType;
 import com.gy.findcase.findcaseapi.service.support.PageQuery;
 import com.gy.findcase.findcaseapi.service.support.QueryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,7 +60,8 @@ public class CollectServiceImpl implements CollectService {
 
     @Override
     public Items<Collection> query() {
-        List<Collection> all = this.collectRepository.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        List<Collection> all = this.collectRepository.findAll(sort);
         long count = this.collectRepository.count();
         return new Items<>(count, all);
     }

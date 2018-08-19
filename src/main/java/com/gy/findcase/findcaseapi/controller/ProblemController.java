@@ -48,7 +48,8 @@ public class ProblemController {
     @GetMapping
     public SimpleResponse query(@CurrentUser User user) {
         Items<Problem> query = this.problemService.query();
-        return simpleResponse(200, query);
+        List<Problem> items = query.getItems();
+        return simpleResponse(200, items);
     }
 
     @ApiOperation(value = "我发布的问题")
