@@ -37,7 +37,7 @@ public class MessageController {
 
     @ApiOperation(value = "添加消息")
     @PostMapping
-    public SimpleResponse add(@RequestBody Message message, @CurrentUser User user) {
+    public SimpleResponse add(@RequestBody Message message) {
         this.messageService.save(message);
         return simpleResponse(200);
     }
