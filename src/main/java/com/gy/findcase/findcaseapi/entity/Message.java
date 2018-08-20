@@ -40,4 +40,9 @@ public class Message {
      * 消息类型 0 表示系统消息 1 表示其他消息
      */
     private Integer type;
+
+    /**
+     * 图片
+     */
+    private String image;
 }

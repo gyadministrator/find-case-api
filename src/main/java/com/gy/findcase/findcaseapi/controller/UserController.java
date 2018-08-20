@@ -6,6 +6,7 @@ import com.gy.findcase.findcaseapi.jwt.utils.AccessToken;
 import com.gy.findcase.findcaseapi.jwt.utils.Audience;
 import com.gy.findcase.findcaseapi.jwt.utils.JwtUtils;
 import com.gy.findcase.findcaseapi.service.UserService;
+import com.gy.findcase.findcaseapi.service.support.Items;
 import com.gy.findcase.findcaseapi.utils.Md5Utils;
 import com.gy.findcase.findcaseapi.utils.response.SimpleResponse;
 import io.swagger.annotations.Api;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.gy.findcase.findcaseapi.utils.response.HttpResponseAndStatus.simpleResponse;
@@ -99,5 +101,13 @@ public class UserController {
         logger.info("修改用户---->" + user.toString());
         this.userService.update(user);
         return simpleResponse(200);
+    }
+
+    @ApiOperation(value = "查询用户")
+    @GetMapping
+    public SimpleResponse query() {
+        Items<User> query = this.userService.query();
+        List<User> items = query.getItems();
+        return simpleResponse(200, items);
     }
 }
