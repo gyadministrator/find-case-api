@@ -10,6 +10,7 @@ spring:
     url: jdbc:mysql://123.207.93.53:3306/find_case?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: gy123456
+    type: com.alibaba.druid.pool.DruidDataSource
   jpa:
     hibernate:
       ddl-auto: update
