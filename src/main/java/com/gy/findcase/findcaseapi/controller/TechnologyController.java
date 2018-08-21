@@ -45,7 +45,7 @@ public class TechnologyController {
 
     @ApiOperation(value = "查询技术")
     @GetMapping
-    public SimpleResponse query(@CurrentUser User user) {
+    public SimpleResponse query() {
         Items<Technology> query = this.technologyService.query();
         List<Technology> items = query.getItems();
         return simpleResponse(200, items);
